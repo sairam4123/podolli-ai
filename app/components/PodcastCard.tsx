@@ -7,7 +7,7 @@ export function PodcastCard({ podcast }: { podcast: TPodcast }) {
       <div className="relative mb-4">
         <div className="min-h-36 min-w-96 aspect-video overflow-hidden rounded-md">
           <img
-            src={podcast.coverImage ?? "/podcastplaceholdercover2.png"}
+            src={podcast.coverImage || "/podcastplaceholdercover2.png"}
             alt={podcast.title}
             className="min-h-36 min-w-96 aspect-video object-cover object-center group-hover:scale-110 transition-all group-hover:blur-[4px] rounded-md mb-4"
           />

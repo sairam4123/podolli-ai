@@ -2,7 +2,7 @@ export type TPodcastEpisode = {
   id: string;
   title: string;
   description: string;
-  coverImage: string;
+  coverImage: string | null;
   audioUrl: string;
   publishedAt: string;
   duration: number; // in seconds
@@ -16,7 +16,7 @@ export type TPodcast = {
   id: string;
   title: string;
   description: string;
-  coverImage: string;
+  coverImage: string | null;
   createdAt: string;
   updatedAt: string;
 
