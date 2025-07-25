@@ -1,7 +1,7 @@
 import type { TPodcast } from "~/types/TPodcast";
 import { PodcastCard } from "./PodcastCard";
 import React, { useEffect } from "react";
-import { PlayCircle } from "lucide-react";
+import { ArrowRightCircle } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 export function PodcastsSection({
@@ -27,9 +27,15 @@ export function PodcastsSection({
       var clientWidth = sectionRef.current?.clientWidth ?? 0;
       if (scrollLeft + clientWidth + margin >= scrollWidth) {
         setShowLeftScrollIndicator(false);
+        if (scrollLeft - margin >= 0) {
+          setShowRightScrollIndicator(true);
+        }
         // scrolled to end
       } else if (scrollLeft - margin <= 0) {
         setShowRightScrollIndicator(false);
+        if (scrollLeft + clientWidth + margin < scrollWidth) {
+          setShowLeftScrollIndicator(true);
+        }
         // scrolled to start
       } else {
         setShowLeftScrollIndicator(true);
@@ -38,6 +44,8 @@ export function PodcastsSection({
       // console.log("Scroll position:", { scrollLeft, scrollWidth, clientWidth });
       setSectionHeight(sectionRef.current?.clientHeight ?? 0);
     };
+
+    handleScroll();
 
     sectionRef.current?.addEventListener("scroll", handleScroll);
   }, [sectionRef.current]);
@@ -74,9 +82,29 @@ export function PodcastsSection({
             >
               <div
                 style={{ height: sectionHeight }}
-                className="w-20 rounded-l-3xl bg-gradient-to-l flex items-center justify-center from-sky-900 via-sky-800/25 via-50% to-transparent"
+                className="w-20 rounded-l-full bg-gradient-to-l flex items-center justify-center from-sky-950 border border-sky-100/50 border-r-0  to-black/50"
               >
-                <PlayCircle className="h-8 w-8 text-gray-200" />
+                <motion.div
+                  className="rounded-full cursor-pointer"
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0, transition: { duration: 0.2 } }}
+                  exit={{ opacity: 0, x: -10, transition: { duration: 0.15 } }}
+                  whileHover={{
+                    scale: 1.1,
+                    backgroundColor: "var(--color-sky-600)",
+                    transition: { duration: 0.2 },
+                    borderRadius: "infinity",
+                  }}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    sectionRef.current?.scrollBy({
+                      left: sectionRef.current?.clientWidth / 4,
+                      behavior: "smooth",
+                    });
+                  }}
+                >
+                  <ArrowRightCircle className="h-8 w-8 text-gray-200" />
+                </motion.div>
               </div>
             </motion.div>
           )}
@@ -84,27 +112,58 @@ export function PodcastsSection({
         <AnimatePresence>
           {showRightScrollIndicator && (
             <motion.div
-            initial={{
+              initial={{
                 opacity: 0,
                 x: -20,
-            }}
-            animate={{
+              }}
+              animate={{
                 opacity: 1,
                 x: 0,
                 transition: { duration: 0.2 },
-            }}
-            exit={{
-              opacity: 0,
-              x: 10,
-              transition: { duration: 0.15 },
-            }}
+              }}
+              exit={{
+                opacity: 0,
+                x: 10,
+                transition: { duration: 0.15 },
+              }}
               className="absolute left-0 flex items-center pl-4"
             >
               <div
                 style={{ height: sectionHeight }}
-                className="w-20 rounded-r-3xl bg-gradient-to-r flex items-center justify-center from-sky-800 via-sky-800/25 via-75% to-transparent"
+                className="w-20 rounded-r-full bg-gradient-to-r flex items-center justify-center from-sky-950 to-black/50 border border-sky-100/50 border-l-0"
               >
-                <PlayCircle className="h-8 w-8 text-gray-200 rotate-180" />
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                    x: 10,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    x: 0,
+                    transition: { duration: 0.2 },
+                  }}
+                  exit={{
+                    opacity: 0,
+                    x: 10,
+                    transition: { duration: 0.15 },
+                  }}
+                  whileHover={{
+                    scale: 1.1,
+                    backgroundColor: "var(--color-sky-600)",
+                    transition: { duration: 0.2 },
+                    borderRadius: "infinity",
+                  }}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    sectionRef.current?.scrollBy({
+                      left: -sectionRef.current?.clientWidth / 4,
+                      behavior: "smooth",
+                    });
+                  }}
+                  className="rounded-full cursor-pointer"
+                >
+                  <ArrowRightCircle className="h-8 w-8 text-gray-200 rotate-180" />
+                </motion.div>
               </div>
             </motion.div>
           )}
