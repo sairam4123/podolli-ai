@@ -33,7 +33,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="flex flex-col">
+      <body className="flex flex-col select-none">
         <NavBar />
         {children}
         <ScrollRestoration />

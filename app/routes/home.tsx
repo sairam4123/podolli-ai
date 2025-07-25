@@ -3,7 +3,7 @@ import { Index } from "../index";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
+    { title: "Podolli.AI - Home" },
     { name: "description", content: "Welcome to React Router!" },
   ];
 }
