@@ -30,10 +30,18 @@ export default function User({loaderData}: Route.ComponentProps) {
     );
 }
 
-export function meta({loaderData}: Route.ComponentProps) {
+export function meta({data}: Route.MetaArgs) {
+    if (!data) {
+        return [{ title: "User Profile - Podolli.AI" }];
+    }
     return [
-        { title: `${loaderData.displayName} - Podolli.AI` },
-        { name: "description", content: loaderData.bio || "User profile on Podolli.AI" },
-        { name: "keywords", content: `user, profile, ${loaderData.username}` },
+        { title: `${data.displayName} - Podolli.AI` },
+        { name: "description", content: data.bio || "User profile on Podolli.AI" },
+        { name: "keywords", content: `user, profile, ${data.username}` },
+        { name: "og:title", content: data.displayName },
+        { name: "og:description", content: data.bio || "User profile on Podolli.AI" },
+        { name: "og:image", content: data.profilePicture || "/podcastplaceholdercover2.png" },
+        { name: "og:type", content: "profile" },
+        { name: "og:url", content: `/user/${data.id}` },
     ];
 }

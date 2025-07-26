@@ -35,15 +35,21 @@ export function loader({params}: Route.LoaderArgs): TPodcast {
     } as TPodcast;
 }
 
-export function meta({loaderData}: Route.ComponentProps) {
+export function meta({data}: Route.MetaArgs) {
+
+    if (!data) {
+        return [{ title: "Podcast - Podolli.AI" }];
+    }
+
     return [
-        { title: `${loaderData.title} - Podolli.AI` },
-        { name: "description", content: loaderData.description || "Podcast details on Podolli.AI" },
-        { name: "keywords", content: `podcast, ${loaderData.title}` },
-        { name: "og:title", content: loaderData.title },
-        { name: "og:description", content: loaderData.description || "Podcast details on Podolli.AI" },
-        { name: "og:image", content: loaderData.coverImage || "/podcastplaceholdercover2.png" },
+        { title: `${data.title} - Podolli.AI` },
+        { name: "description", content: data.description || "Podcast details on Podolli.AI" },
+        { name: "keywords", content: `podcast, ${data.title}` },
+        { rel: "icon", href: data.coverImage || "/podcastplaceholdercover2.png" },
+        { name: "og:title", content: data.title },
+        { name: "og:description", content: data.description || "Podcast details on Podolli.AI" },
+        { name: "og:image", content: data.coverImage || "/podcastplaceholdercover2.png" },
         { name: "og:type", content: "website" },
-        { name: "og:url", content: `/podcast/${loaderData.id}` },
+        { name: "og:url", content: `/podcast/${data.id}` },
     ];
 }
