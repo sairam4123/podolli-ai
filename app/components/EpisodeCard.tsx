@@ -8,7 +8,7 @@ export function EpisodeHorizontalCard({
   return (
     <div className="flex flex-row gap-2 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
       <img
-        src={episode.coverImage || "/podcastplaceholdercover.png"}
+        src={episode.coverImage || "/podcastplaceholdercover2.png"}
         alt={episode.title}
         className="w-full h-32 object-cover rounded-md"
       />

@@ -9,6 +9,10 @@ export type TPodcastEpisode = {
   createdAt: string;
   updatedAt: string;
 
+  plays?: number;
+  likes?: number;
+  dislikes?: number;
+
   podcastId: string;
 }
 
