@@ -71,6 +71,7 @@ export function PodcastsSection({
               animate={{
                 opacity: 1,
                 x: 0,
+                paddingLeft: "0rem",
                 transition: { duration: 0.2 },
               }}
               exit={{
@@ -78,30 +79,29 @@ export function PodcastsSection({
                 x: -20,
                 transition: { duration: 0.2 },
               }}
-              className="absolute right-0 flex items-center pr-4"
+              whileHover={{
+                // x: -10,
+                paddingLeft: "1rem",
+                transition: { duration: 0.2 },
+              }}
+              onClick={(event) => {
+                event.stopPropagation();
+                sectionRef.current?.scrollBy({
+                  left: sectionRef.current?.clientWidth / 4,
+                  behavior: "smooth",
+                });
+              }}
+              className="absolute right-0 w-24 flex items-center cursor-pointer pr-4"
             >
               <div
                 style={{ height: sectionHeight }}
-                className="w-20 rounded-l-full bg-gradient-to-l flex items-center justify-center from-sky-950 border border-sky-100/50 border-r-0  to-black/50"
+                className="w-20 hover:w-full rounded-l-full bg-gradient-to-l flex items-center justify-center hover:to-sky-700/50 transition-colors from-sky-950 border border-sky-100/50 border-r-0  to-black/50"
               >
                 <motion.div
                   className="rounded-full cursor-pointer"
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0, transition: { duration: 0.2 } }}
                   exit={{ opacity: 0, x: -10, transition: { duration: 0.15 } }}
-                  whileHover={{
-                    scale: 1.1,
-                    backgroundColor: "var(--color-sky-600)",
-                    transition: { duration: 0.2 },
-                    borderRadius: "infinity",
-                  }}
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    sectionRef.current?.scrollBy({
-                      left: sectionRef.current?.clientWidth / 4,
-                      behavior: "smooth",
-                    });
-                  }}
                 >
                   <ArrowRightCircle className="h-8 w-8 text-gray-200" />
                 </motion.div>
@@ -119,6 +119,7 @@ export function PodcastsSection({
               animate={{
                 opacity: 1,
                 x: 0,
+                paddingRight: "0rem",
                 transition: { duration: 0.2 },
               }}
               exit={{
@@ -126,11 +127,22 @@ export function PodcastsSection({
                 x: 10,
                 transition: { duration: 0.15 },
               }}
-              className="absolute left-0 flex items-center pl-4"
+              whileHover={{
+                paddingRight: "1rem",
+                transition: { duration: 0.2 },
+              }}
+              onClick={(event) => {
+                event.stopPropagation();
+                sectionRef.current?.scrollBy({
+                  left: -sectionRef.current?.clientWidth / 4,
+                  behavior: "smooth",
+                });
+              }}
+              className="absolute w-24 left-0 flex cursor-pointer items-center pl-4"
             >
               <div
                 style={{ height: sectionHeight }}
-                className="w-20 rounded-r-full bg-gradient-to-r flex items-center justify-center from-sky-950 to-black/50 border border-sky-100/50 border-l-0"
+                className="w-20 hover:w-full rounded-r-full bg-gradient-to-r flex items-center justify-center hover:to-sky-700/50 transition-colors from-sky-950 to-black/50 border border-sky-100/50 border-l-0"
               >
                 <motion.div
                   initial={{
@@ -146,19 +158,6 @@ export function PodcastsSection({
                     opacity: 0,
                     x: 10,
                     transition: { duration: 0.15 },
-                  }}
-                  whileHover={{
-                    scale: 1.1,
-                    backgroundColor: "var(--color-sky-600)",
-                    transition: { duration: 0.2 },
-                    borderRadius: "infinity",
-                  }}
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    sectionRef.current?.scrollBy({
-                      left: -sectionRef.current?.clientWidth / 4,
-                      behavior: "smooth",
-                    });
                   }}
                   className="rounded-full cursor-pointer"
                 >
