@@ -29,3 +29,11 @@ export default function User({loaderData}: Route.ComponentProps) {
         </div>
     );
 }
+
+export function meta({loaderData}: Route.ComponentProps) {
+    return [
+        { title: `${loaderData.displayName} - Podolli.AI` },
+        { name: "description", content: loaderData.bio || "User profile on Podolli.AI" },
+        { name: "keywords", content: `user, profile, ${loaderData.username}` },
+    ];
+}

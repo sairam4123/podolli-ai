@@ -26,3 +26,16 @@ export default function Episode({ loaderData }: Route.ComponentProps) {
         </div>
     );
 }
+
+export function meta({ loaderData }: Route.ComponentProps) {
+    return [
+        { title: `${loaderData.title} - Podolli.AI` },
+        { name: "description", content: loaderData.description || "Episode details on Podolli.AI" },
+        { name: "keywords", content: `episode, ${loaderData.title}` },
+        { name: "og:title", content: loaderData.title },
+        { name: "og:description", content: loaderData.description || "Episode details on Podolli.AI" },
+        { name: "og:image", content: loaderData.coverImage || "/podcastplaceholdercover2.png" },
+        { name: "og:type", content: "article" },
+        { name: "og:url", content: `/episode/${loaderData.id}` },
+    ];
+}
