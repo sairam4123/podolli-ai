@@ -2,7 +2,7 @@ import type { TPodcast, TPodcastEpisode } from "./TPodcast";
 
 export type TUserProfile = {
     id: string;
-    name: string;
+    username: string;
     createdAt: string;
     updatedAt: string;
     profilePicture: string | null;
